@@ -4,12 +4,9 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-  darkMode: "class",
+  darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: {
-        sans: ["Inter", "Arial", "sans-serif"],
-      },
       colors: {
         primary: {
           50: '#fdf2f8',

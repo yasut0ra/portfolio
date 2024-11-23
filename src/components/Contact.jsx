@@ -15,18 +15,22 @@ export default function Contact() {
     setStatus({ type: '', message: '' });
 
     try {
-      await emailjs.sendForm(
+      const result = await emailjs.sendForm(
         import.meta.env.VITE_EMAILJS_SERVICE_ID,
         import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         form.current,
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      setStatus({
-        type: 'success',
-        message: 'メッセージを送信しました。ありがとうございます！'
-      });
-      form.current.reset();
+      if (result.text === 'OK') {
+        setStatus({
+          type: 'success',
+          message: 'メッセージを送信しました。ありがとうございます！'
+        });
+        form.current.reset();
+      } else {
+        throw new Error('送信に失敗しました');
+      }
     } catch (error) {
       console.error('Failed to send email:', error);
       setStatus({
@@ -48,39 +52,62 @@ export default function Contact() {
         <motion.form
           ref={form}
           onSubmit={handleSubmit}
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
           className="space-y-6 bg-white/50 dark:bg-gray-800/50 
                      backdrop-blur-lg rounded-2xl p-8 shadow-xl"
         >
-          <div>
-            <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-              お名前
-            </label>
-            <input
-              type="text"
-              name="user_name"
-              required
-              className="w-full px-4 py-3 rounded-lg border border-gray-300 
-                       dark:border-gray-600 bg-white dark:bg-gray-700
-                       focus:ring-2 focus:ring-primary-500 
-                       focus:border-transparent"
-            />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                お名前
+              </label>
+              <input
+                type="text"
+                name="user_name"
+                required
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 
+                         dark:border-gray-600 bg-white dark:bg-gray-700
+                         text-gray-900 dark:text-white
+                         focus:ring-2 focus:ring-primary-500 
+                         focus:border-transparent transition-colors"
+                placeholder="山田 太郎"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
+                メールアドレス
+              </label>
+              <input
+                type="email"
+                name="user_email"
+                required
+                className="w-full px-4 py-3 rounded-lg border border-gray-300 
+                         dark:border-gray-600 bg-white dark:bg-gray-700
+                         text-gray-900 dark:text-white
+                         focus:ring-2 focus:ring-primary-500 
+                         focus:border-transparent transition-colors"
+                placeholder="example@email.com"
+              />
+            </div>
           </div>
 
           <div>
             <label className="block text-sm font-medium mb-2 text-gray-700 dark:text-gray-300">
-              メールアドレス
+              件名
             </label>
             <input
-              type="email"
-              name="user_email"
+              type="text"
+              name="subject"
               required
               className="w-full px-4 py-3 rounded-lg border border-gray-300 
                        dark:border-gray-600 bg-white dark:bg-gray-700
+                       text-gray-900 dark:text-white
                        focus:ring-2 focus:ring-primary-500 
-                       focus:border-transparent"
+                       focus:border-transparent transition-colors"
+              placeholder="お問い合わせ内容の件名"
             />
           </div>
 
@@ -94,8 +121,10 @@ export default function Contact() {
               rows="5"
               className="w-full px-4 py-3 rounded-lg border border-gray-300 
                        dark:border-gray-600 bg-white dark:bg-gray-700
+                       text-gray-900 dark:text-white
                        focus:ring-2 focus:ring-primary-500 
-                       focus:border-transparent resize-none"
+                       focus:border-transparent transition-colors resize-none"
+              placeholder="メッセージを入力してください"
             />
           </div>
 

@@ -16,14 +16,21 @@ const cardVariants = {
     }
   })
 };
+// スキルアイテムのコンポーネント部分を修正
+const SkillItem = ({ icon: Icon, name }) => (
+    <div className="flex items-center space-x-2">
+      <Icon className="w-6 h-6 text-primary-500" />
+      <span className="text-gray-800 dark:text-gray-200">{name}</span>
+    </div>
+  );
 
-export default function About() {
-  return (
-    <Section
-      id="about"
-      title="About Me"
-      subtitle="フルスタック開発者として、革新的なWebアプリケーションの開発に情熱を注いでいます。"
-    >
+  export default function About() {
+    return (
+      <Section
+        id="about"
+        title="About Me"
+        subtitle="フルスタック開発者として、革新的なWebアプリケーションの開発に情熱を注いでいます。"
+      >
       <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
         {/* Stats */}
         <div className="grid grid-cols-2 gap-6">
@@ -45,17 +52,19 @@ export default function About() {
 
         {/* Skills */}
         <div className="space-y-10">
-          {skills.map((skill) => (
-            <Card
-              key={skill.name}
-              variant="minimal"
-              className="p-6"
-              isHoverable={false}
-            >
-              <div className="flex justify-between mb-3">
-                <span className="text-xl font-medium">{skill.name}</span>
-                <span className="text-xl text-primary-500">{skill.level}%</span>
-              </div>
+        {skills.map((skill) => (
+          <Card
+            key={skill.name}
+            variant="minimal"
+            className="p-6"
+            isHoverable={false}
+          >
+            <div className="flex justify-between mb-3">
+              <span className="text-xl font-medium text-gray-800 dark:text-gray-200">
+                {skill.name}
+              </span>
+              <span className="text-xl text-primary-500">{skill.level}%</span>
+            </div>
               <div className="h-3 bg-gray-200 dark:bg-gray-700 rounded-full overflow-hidden">
                 <motion.div
                   initial={{ width: 0 }}

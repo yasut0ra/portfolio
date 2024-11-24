@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Card from "../../common/Card";
+import Section from "../../../components/common/Section";
 import { useScrollAnimation, cyberVariants } from "../animations/useAnimations";
 import { useRef } from "react";
 
@@ -8,17 +9,10 @@ export default function Experience({ experience }) {
   const { fadeIn, cyberLine, createHorizontalLineAnimation } = useScrollAnimation(ref);
 
   return (
-    <div ref={ref} className="space-y-8">
-      <motion.h3
-        variants={cyberVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8"
-      >
-        経歴
-      </motion.h3>
-
+    <Section
+      title="Experience"
+      subtitle="これまでの経歴をご紹介します。"
+    >
       {/* Timeline Container */}
       <div className="relative">
         {/* Vertical Timeline Line */}
@@ -91,6 +85,6 @@ export default function Experience({ experience }) {
           </motion.div>
         ))}
       </div>
-    </div>
+    </Section>
   );
 }

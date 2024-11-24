@@ -53,23 +53,6 @@ export default function CyberLines() {
         ))}
       </motion.div>
 
-      {/* エネルギーパルス */}
-      <motion.div
-        className="absolute inset-0"
-        animate={{
-          background: [
-            "radial-gradient(circle at center, var(--tw-gradient-from) 0%, transparent 10%)",
-            "radial-gradient(circle at center, var(--tw-gradient-from) 0%, transparent 50%)",
-            "radial-gradient(circle at center, var(--tw-gradient-from) 0%, transparent 10%)"
-          ]
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut"
-        }}
-      />
-
       {/* DNAらせん構造 */}
       {Array.from({ length: 20 }).map((_, i) => (
         <motion.div
@@ -164,75 +147,6 @@ export default function CyberLines() {
         </motion.div>
       ))}
 
-      {/* 水平接続ライン - 左右対称に */}
-      {[0.2, 0.4, 0.6, 0.8].map((progress) => (
-        <>
-          <motion.div
-            key={`hline-left-${progress}`}
-            className="absolute h-[2px]"
-            style={{
-              left: '10%',
-              width: '40%',
-              top: `${progress * 100}%`,
-              background: 'linear-gradient(90deg, var(--tw-gradient-from), transparent)',
-              ...createHorizontalLineAnimation(progress)
-            }}
-          />
-          <motion.div
-            key={`hline-right-${progress}`}
-            className="absolute h-[2px]"
-            style={{
-              right: '10%',
-              width: '40%',
-              top: `${progress * 100}%`,
-              background: 'linear-gradient(-90deg, var(--tw-gradient-to), transparent)',
-              ...createHorizontalLineAnimation(progress)
-            }}
-          />
-        </>
-      ))}
-
-      {/* データフローパーティクル - 両サイドに */}
-      {[...Array(8)].map((_, index) => (
-        <>
-          <motion.div
-            key={`data-left-${index}`}
-            className="absolute w-1.5 h-1.5 rounded-full"
-            style={{
-              left: `${10 + Math.random() * 5}%`,
-              background: 'var(--tw-gradient-from)',
-              boxShadow: '0 0 8px var(--tw-gradient-from)',
-              ...createDataFlowAnimation(index)
-            }}
-          >
-            <motion.div
-              className="absolute top-0 left-1/2 w-[1px] h-8 -translate-x-1/2"
-              style={{
-                background: 'linear-gradient(to bottom, var(--tw-gradient-from), transparent)',
-                opacity: 0.3
-              }}
-            />
-          </motion.div>
-          <motion.div
-            key={`data-right-${index}`}
-            className="absolute w-1.5 h-1.5 rounded-full"
-            style={{
-              right: `${10 + Math.random() * 5}%`,
-              background: 'var(--tw-gradient-to)',
-              boxShadow: '0 0 8px var(--tw-gradient-to)',
-              ...createDataFlowAnimation(index)
-            }}
-          >
-            <motion.div
-              className="absolute top-0 left-1/2 w-[1px] h-8 -translate-x-1/2"
-              style={{
-                background: 'linear-gradient(to bottom, var(--tw-gradient-to), transparent)',
-                opacity: 0.3
-              }}
-            />
-          </motion.div>
-        </>
-      ))}
 
       {/* 3D浮遊する六角形 */}
       {Array.from({ length: 8 }).map((_, i) => (

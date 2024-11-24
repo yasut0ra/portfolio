@@ -1,6 +1,7 @@
 import { useDarkMode } from './hooks/useDarkMode';
 import Header from './components/layout/Header';
-import About from './components/About';
+// Aboutのインポートパスを更新
+import About from './components/about'; // ./components/About から変更
 import Projects from './components/Projects';
 import Contact from './components/Contact';
 import { motion, AnimatePresence } from 'framer-motion';

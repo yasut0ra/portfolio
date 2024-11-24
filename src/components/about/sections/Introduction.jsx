@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import Card from "../../common/Card";
 import { useScrollAnimation, cyberVariants } from "../animations/useAnimations";
 import { useRef } from "react";
+import { useTransform } from "framer-motion";
 
 export default function Introduction({ introduction }) {
   const ref = useRef(null);
@@ -17,21 +18,21 @@ export default function Introduction({ introduction }) {
         className="relative"
         style={fadeIn}
       >
-        {/* Cyber Line */}
+        {/* Cyber Line - より濃く */}
         <motion.div
-          className="absolute -left-4 top-0 w-[2px] h-full bg-gradient-to-b from-primary-500/0 via-primary-500 to-primary-500/0"
+          className="absolute -left-4 top-0 w-[2px] h-full bg-gradient-to-b from-primary-500/20 via-primary-500 to-primary-500/20"
           style={cyberLine}
         />
 
-        {/* Background Decoration */}
-        <div className="absolute -top-6 -left-6 w-20 h-20 bg-primary-500/10 rounded-full blur-2xl" />
-        <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-secondary-500/10 rounded-full blur-2xl" />
+        {/* Background Decoration - より濃く、大きく */}
+        <div className="absolute -top-8 -left-8 w-32 h-32 bg-primary-500/20 rounded-full blur-2xl" />
+        <div className="absolute -bottom-8 -right-8 w-32 h-32 bg-secondary-500/20 rounded-full blur-2xl" />
 
         {/* Content */}
-        <Card variant="gradient" className="p-8 relative overflow-hidden">
-          {/* Quote Icon */}
+        <Card variant="gradient" className="p-8 relative overflow-hidden backdrop-blur-sm">
+          {/* Quote Icon - より濃く */}
           <svg
-            className="absolute top-4 left-4 w-12 h-12 text-primary-500/20"
+            className="absolute top-4 left-4 w-12 h-12 text-primary-500/30"
             fill="currentColor"
             viewBox="0 0 24 24"
           >
@@ -47,7 +48,7 @@ export default function Introduction({ introduction }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="text-gray-600 dark:text-gray-400 leading-relaxed"
+                  className="text-gray-700 dark:text-gray-300 leading-relaxed"
                 >
                   {paragraph.trim()}
                 </motion.p>

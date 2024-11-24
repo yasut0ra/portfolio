@@ -6,16 +6,28 @@ export function useScrollAnimation(ref) {
     offset: ["start end", "end start"] // 要素が画面に入る前から出るまでを監視
   });
 
-  // より顕著なフェードインアニメーション
+  // フェードインアニメーションの調整
   const fadeIn = {
-    opacity: useTransform(scrollYProgress, [0, 0.3], [0, 1]),
-    y: useTransform(scrollYProgress, [0, 0.3], [100, 0]), // より大きな移動距離
+    opacity: useTransform(
+      scrollYProgress, 
+      [0, 0.2], // スクロール範囲を短く
+      [0.3, 1]  // 最小透明度を0.3に設定
+    ),
+    y: useTransform(
+      scrollYProgress, 
+      [0, 0.2], 
+      [50, 0]   // 移動距離を控えめに
+    ),
   };
 
-  // サイバーラインのアニメーション
+  // サイバーラインのアニメーション調整
   const cyberLine = {
-    scaleY: useTransform(scrollYProgress, [0, 0.5], [0, 1]),
-    opacity: useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0])
+    scaleY: useTransform(scrollYProgress, [0, 0.3], [0, 1]),
+    opacity: useTransform(
+      scrollYProgress, 
+      [0, 0.1, 0.9, 1], 
+      [0, 0.8, 0.8, 0] // 最大透明度を0.8に
+    )
   };
 
   // 水平ラインのアニメーション
@@ -89,19 +101,19 @@ export const sectionVariants = {
   }
 };
 
-// サイバーエフェクト用のバリアント
+// サイバーエフェクト用のバリアントも調整
 export const cyberVariants = {
   hidden: { 
-    opacity: 0, 
-    scale: 0.8,
-    filter: "blur(10px)"
+    opacity: 0.3,  // 初期透明度を上げる
+    scale: 0.95,
+    filter: "blur(5px)"
   },
   visible: {
     opacity: 1,
     scale: 1,
     filter: "blur(0px)",
     transition: {
-      duration: 0.8,
+      duration: 0.6,
       ease: "easeOut"
     }
   }

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
+import Card from "../../common/Card";
+import { useScrollAnimation, cyberVariants } from "../animations/useAnimations";
 import { useRef } from "react";
-import Card from "../common/Card";
-import { useScrollAnimation, cyberVariants } from "./animations/useAnimations";
 
 export default function Introduction({ introduction }) {
   const ref = useRef(null);

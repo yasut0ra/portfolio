@@ -1,13 +1,12 @@
-// framer-motionのインポートを更新
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import Section from "../common/Section";
-import Introduction from "./Introduction";
-import Stats from "./Stats";
-import Experience from "./Experience";
-import Skills from "./Skills";
+import Introduction from "./sections/Introduction";
+import Stats from "./sections/Stats";
+import Experience from "./sections/Experience";
+import Skills from "./sections/Skills";
 import CyberLines from "./animations/CyberLines";
 import { useScrollAnimation, sectionVariants } from "./animations/useAnimations";
+import { useRef } from "react";
 
 // データのインポート
 import { 

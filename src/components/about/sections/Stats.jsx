@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import Card from "../../common/Card";
+import Section from "../../common/Section";
 import { useScrollAnimation, cyberVariants } from "../animations/useAnimations";
 import { useRef } from "react";
 
@@ -23,17 +24,10 @@ export default function Stats({ stats }) {
   const { fadeIn, createHorizontalLineAnimation } = useScrollAnimation(ref);
 
   return (
-    <div ref={ref} className="space-y-8">
-      <motion.h3
-        variants={cyberVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8"
-      >
-        実績概要
-      </motion.h3>
-      
+    <Section
+      title="Stats"
+      subtitle="これまでの実績をご紹介します。"
+    >
       <div className="relative">
         {/* Background Decoration */}
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-primary-500/5 rounded-full blur-3xl" />
@@ -106,6 +100,6 @@ export default function Stats({ stats }) {
           ))}
         </div>
       </div>
-    </div>
+    </Section>
   );
 }

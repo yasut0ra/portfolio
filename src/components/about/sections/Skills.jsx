@@ -1,24 +1,18 @@
 import { motion } from "framer-motion";
 import Card from "../../common/Card";
+import Section from "../../../components/common/Section";
 import { useScrollAnimation, cyberVariants } from "../animations/useAnimations";
 import { useRef } from "react";
 
-export default function Skills({ skills }) {
+const Skills = ({ skills }) => {
   const ref = useRef(null);
   const { fadeIn, createHorizontalLineAnimation } = useScrollAnimation(ref);
 
   return (
-    <div ref={ref} className="space-y-8">
-      <motion.h3
-        variants={cyberVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        className="text-2xl font-bold text-center text-gray-800 dark:text-gray-200 mb-8"
-      >
-        スキル
-      </motion.h3>
-
+    <Section
+      title="Skills"
+      subtitle="習得したスキルをご紹介します。"
+    >
       <div className="grid md:grid-cols-2 gap-6">
         {skills.map((skill, index) => (
           <motion.div
@@ -113,6 +107,8 @@ export default function Skills({ skills }) {
           </motion.div>
         ))}
       </div>
-    </div>
+    </Section>
   );
-}
+};
+
+export default Skills;

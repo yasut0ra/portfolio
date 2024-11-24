@@ -21,11 +21,7 @@ export default function About() {
   const { fadeIn } = useScrollAnimation(sectionRef);
 
   return (
-    <Section
-      id="about"
-      title="About Me"
-      subtitle={introduction.title}
-    >
+    <section className="relative min-h-screen py-20">
       {/* Animated Background Lines */}
       <CyberLines />
 
@@ -75,6 +71,6 @@ export default function About() {
           <Skills skills={skills} />
         </motion.div>
       </div>
-    </Section>
+    </section>
   );
 }

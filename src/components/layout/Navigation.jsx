@@ -1,46 +1,59 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { NAV_ITEMS } from '../../constants/navigation';
 import { menuVariants, itemVariants, hoverScale } from '../../constants/animations';
+import ThemeToggle from '../common/ThemeToggle';
 
 export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
 
   // デスクトップナビゲーションアイテム
   const NavItem = ({ name, path }) => (
-    <motion.a
-      key={name}
-      href={path}
-      {...hoverScale}
+    <Link 
+      to={path}
       className="relative group text-lg"
     >
-      <span className="text-gray-800 dark:text-gray-200">
+      <motion.span
+        {...hoverScale}
+        className="text-gray-800 dark:text-gray-200"
+      >
         {name}
-      </span>
-      <span className="absolute -bottom-2 left-0 w-0 h-0.5 
+        <span className="absolute -bottom-2 left-0 w-0 h-0.5 
                      bg-gradient-to-r from-primary-500 to-secondary-500 
                      group-hover:w-full transition-all duration-300" />
-    </motion.a>
+      </motion.span>
+    </Link>
   );
 
   // モバイルナビゲーションアイテム
   const MobileNavItem = ({ name, path }) => (
-    <motion.a
-      key={name}
-      href={path}
-      variants={itemVariants}
-      onClick={() => setIsOpen(false)}
+    <Link 
+      to={path}
       className="block text-center text-lg py-3 
                text-gray-800 dark:text-gray-200
                hover:text-primary-500 dark:hover:text-primary-400
                transition-colors"
+      onClick={() => setIsOpen(false)}
     >
-      {name}
-    </motion.a>
+      <motion.span variants={itemVariants}>
+        {name}
+      </motion.span>
+    </Link>
   );
 
   return (
-    <>
+    <div className="flex items-center justify-between">
+      {/* ロゴ */}
+      <Link 
+        to="/"
+        className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-secondary-500"
+      >
+        <motion.span {...hoverScale}>
+          Yasut0ra's Portfolio
+        </motion.span>
+      </Link>
+
       {/* デスクトップナビゲーション */}
       <nav className="hidden md:flex items-center space-x-12">
         {NAV_ITEMS.map((item) => (
@@ -48,8 +61,14 @@ export default function Navigation() {
         ))}
       </nav>
 
+      {/* モークモードトグル */}
+      <div className="hidden md:block">
+        <ThemeToggle />
+      </div>
+
       {/* モバイルナビゲーション */}
-      <div className="md:hidden">
+      <div className="md:hidden flex items-center space-x-4">
+        <ThemeToggle />
         <motion.button
           {...hoverScale}
           onClick={() => setIsOpen(!isOpen)}
@@ -75,6 +94,6 @@ export default function Navigation() {
           </div>
         </motion.div>
       </div>
-    </>
+    </div>
   );
 }

@@ -23,12 +23,12 @@ export function useScrollAnimation(ref) {
   const fadeIn = {
     opacity: useTransform(
       scrollYProgress,
-      [0, 0.3, 1],
+      [0, 0.2, 0.3],
       [0, 1, 1]
     ),
     y: useTransform(
       scrollYProgress,
-      [0, 0.3, 1],
+      [0, 0.2, 0.3],
       [50, 0, 0]
     )
   };
